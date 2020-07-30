@@ -1,0 +1,29 @@
+.like {
+  padding-left: 22px;
+  cursor: pointer;
+  text-align: center;
+
+  &__icon {
+    background-image: url(Heart_transparent.png);
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-left: -22px;
+  }
+  
+  &__checkbox-hide {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+
+    &:checked+.like__icon {
+      background-image: url(Heart_red.png);
+    }
+  }
+
+}

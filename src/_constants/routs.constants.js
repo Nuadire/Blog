@@ -1,8 +1,8 @@
-export const URL =  "https://conduit.productionready.io/api/";
 export const ROUTS = {
-  "routHome": "/",
-  "routLogin": "/login",
-  "routSignUp": "/signup",
-  "login": `${URL}users/login`,
-  "register": `${URL}users`
+  home: "/",
+  createArticle: "/add",
+  fullTextArticle: `/articles/:slug`,
+  editArticle: `/articles/:slug/edit`,
+  login: "/login",
+  signUp: "/signup",
 };

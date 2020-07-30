@@ -1,0 +1,48 @@
+.header-app {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  background-color: white;
+  height: 80px;
+  padding: 16px 22px 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  &__public,
+  &__private {
+    display: grid;
+    align-items: center;
+    gap: 27px;
+    grid-template-columns: repeat(3, auto);
+  }
+
+  &__btn {
+    font-size: 18px;
+    line-height: 28px;
+
+    &--border {
+      padding: 0 10px;
+      color: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(0, 0, 0, 0.75);
+      border-radius: 5px;
+    }
+    
+    &--color{
+      color: #52c41a;
+      border: 1px solid #52c41a;
+      
+    }
+    &--large{
+      padding: 10px 20px;      
+      height: auto;
+    }
+  }
+
+}
