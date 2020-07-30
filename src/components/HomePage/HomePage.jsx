@@ -33,7 +33,6 @@ class HomePage extends React.PureComponent {
               />
             );
           })}
-          <div className="pagination" />
       </>
     );
   }
