@@ -23,14 +23,17 @@ const toggleFavorites = (state, { payload }) => ({
 
 export const articlesReducer = handleActions(
   {
-    [articlesRequest]: () => ({ loadingArticles: true }),
-    [articlesSuccess]: (state, { payload }) => ({
+    [articlesRequest]: (state) => ({ ...state, loadingArticles: true }),
+    [articlesSuccess]: (state, { payload: { articles, articlesCount, currentPage } }) => ({
+      // ...state,
+      currentPage,
+      articles,
+      articlesCount,
       loadingArticles: false,
-      articles: payload,
     }),
-    [articlesFailure]: () => ({ loadingArticles: false }),
+    [articlesFailure]: (state) => ({...state, loadingArticles: false }),
     [articleFavorited]: toggleFavorites,
     [articleUnfavorited]: toggleFavorites,
   },
-  {}
+  { currentPage: 0, loadingArticles: true }
 );

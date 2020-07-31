@@ -7,12 +7,13 @@ import {
   alertError,
 } from "./actions";
 import { article } from "../_services";
+import { LIMIT_ARTICLES_PAGE } from "../_constants";
 
 export const getArticles = (skip) => async (dispatch) => {
   dispatch(articlesRequest());
   try {
-    const response = await article.getArticles(10, skip);
-    dispatch(articlesSuccess(response.articles));
+    const response = await article.getArticles(LIMIT_ARTICLES_PAGE, skip);
+    dispatch(articlesSuccess({...response, currentPage: skip}));
   } catch (error) {
     dispatch(articlesFailure(error));
     dispatch(alertError(error.message));
