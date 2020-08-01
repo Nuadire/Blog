@@ -8,6 +8,8 @@ import { HeaderApp } from "../HeaderApp/HeaderApp";
 import { HomePage } from "../HomePage";
 import { LoginPage } from "../LoginPage";
 import { RegisterPage } from "../RegisterPage";
+import { EditArticlePage } from "../EditArticlePage/EditArticlePage";
+import { ViewArticlePage } from "../ViewArticlePage/ViewArticlePage"
 import { ROUTS } from "../../_constants";
 import "./App.scss";
 
@@ -23,9 +25,9 @@ class App extends React.PureComponent {
             <Route exact path={ROUTS.home} component={HomePage} />
             <Route path={ROUTS.login} component={LoginPage} />
             <Route path={ROUTS.signUp} component={RegisterPage} />
-            {/* <Route path={ROUTS.addArticle} component={CreateArticlePage} />
+            <Route path={ROUTS.addArticle} component={EditArticlePage} />
             <Route path={ROUTS.editArticle} component={EditArticlePage} />
-            <Route path={ROUTS.fullTextArticle} component={ViewArticlePage} /> */}
+            <Route path={ROUTS.fullTextArticle} component={ViewArticlePage} />
           </Switch>
         </HashRouter>
       </div>

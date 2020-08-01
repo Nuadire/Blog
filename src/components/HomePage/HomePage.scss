@@ -39,7 +39,7 @@
     height: 24px;
     
     &:disabled{
-      opacity: 50%;
+      opacity: 0.5;
       cursor: auto;
       user-select: none;
     }

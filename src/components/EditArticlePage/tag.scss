@@ -1,0 +1,24 @@
+.tag {
+  &__row {
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    width: 300px;
+  }
+
+  &__btn-delete {
+    width: 118px;
+    margin-left: 17px;
+    border-radius: 4px;
+  }
+
+  &__btn-add {
+    width: 136px;
+    border-radius: 4px;
+
+    &--row {
+      margin-left: 17px;
+    }
+  }
+}

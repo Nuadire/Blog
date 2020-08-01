@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { ROUTS } from "../../../_constants";
-import DefaultIcon from "./smiley-cyrus.jpg";
 import { userActions } from "../../../_actions";
 import "./user.scss";
+import DEFAULT_IMG from "./smiley-cyrus.jpg";
 
 const HeaderPrivate = ({ user, logout }) => (
   <div className="header-app__private">
@@ -19,7 +20,7 @@ const HeaderPrivate = ({ user, logout }) => (
       <span className="user__name">{user.username}</span>
       <img
         className="user__icon"
-        src={user.image || DefaultIcon}
+        src={user.image || DEFAULT_IMG}
         alt="avatar"
       />
     </div>
@@ -31,6 +32,18 @@ const HeaderPrivate = ({ user, logout }) => (
     </Button>
   </div>
 );
+
+HeaderPrivate.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    image: PropTypes.string
+  }).isRequired,
+  logout: PropTypes.func.isRequired
+}
+
+HeaderPrivate.defaultProps = {
+}
+
 function mapState(state) {
   const { user } = state.authentication;
   return { user };

@@ -27,7 +27,6 @@ class LoginPage extends React.PureComponent {
       <div className="login-page">
         <h2 className="login-page__title">Sign In</h2>
         <Form
-          // {...layout}
           layout="vertical"
           name="basic"
           onFinish={this.onFinish}
