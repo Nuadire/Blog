@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { userActions } from "../../_actions";
 import { alertClear } from "../../_actions/actions";
 import { ROUTS } from "../../_constants";
-import "./LoginPage.scss";
 
 const redirectToHome = (history) => () => history.push(ROUTS.home);
 

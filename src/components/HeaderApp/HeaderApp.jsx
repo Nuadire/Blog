@@ -7,8 +7,6 @@ import { alertClear } from "../../_actions/actions";
 import { ROUTS } from "../../_constants";
 import { HeaderPrivate } from "./HeaderPrivate/HeaderPrivate";
 
-import "./HeaderApp.scss";
-
 const Logo = (props) => (
   <Link to={ROUTS.home} {...props}>
     Realworld Blog
@@ -55,7 +53,6 @@ function mapState(state) {
 
 const actionCreators = {
   login: userActions.login,
-  logout: userActions.logout,
   clearAlert: alertClear,
 };
 

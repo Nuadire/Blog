@@ -2,7 +2,6 @@ import { requestUrl } from "../_constants";
 import { handleResponse } from "./common.service";
 
 function logout() {
-  // remove user from local storage to log user out
   localStorage.removeItem("user");
 }
 

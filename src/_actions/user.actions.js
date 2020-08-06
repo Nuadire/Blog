@@ -1,4 +1,4 @@
-import { userService } from "../_services";
+import { setToken, userService } from "../_services";
 import {
   alertSuccess,
   alertError,
@@ -15,8 +15,9 @@ import {
 const login = (email, password, redirectToPage) => async (dispatch) => {
   dispatch(userLoginRequest());
   try {
-    const user = await userService.login(email, password);
-    dispatch(userLoginSuccess(user));
+    const response = await userService.login(email, password);
+    setToken(response.user.token);
+    dispatch(userLoginSuccess(response));
     redirectToPage();
     dispatch(alertClear());
   } catch (error) {
@@ -25,10 +26,14 @@ const login = (email, password, redirectToPage) => async (dispatch) => {
   }
 };
 
-const logout = () => (dispatch) => {
+const logout = (redirectToPage = ()=>{}) => (dispatch) => {
+  setToken(null);
   userService.logout();
+  redirectToPage();
   dispatch(userLogout());
   dispatch(alertClear());
+
+
 };
 
 const register = (user, redirectToPage) => async (dispatch) => {

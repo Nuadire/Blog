@@ -11,7 +11,6 @@ import { RegisterPage } from "../RegisterPage";
 import { EditArticlePage } from "../EditArticlePage/EditArticlePage";
 import { ViewArticlePage } from "../ViewArticlePage/ViewArticlePage"
 import { ROUTS } from "../../_constants";
-import "./App.scss";
 
 class App extends React.PureComponent {
   render() {
@@ -25,9 +24,9 @@ class App extends React.PureComponent {
             <Route exact path={ROUTS.home} component={HomePage} />
             <Route path={ROUTS.login} component={LoginPage} />
             <Route path={ROUTS.signUp} component={RegisterPage} />
-            <Route path={ROUTS.addArticle} component={EditArticlePage} />
-            <Route path={ROUTS.editArticle} component={EditArticlePage} />
-            <Route path={ROUTS.fullTextArticle} component={ViewArticlePage} />
+            <Route exact path={ROUTS.createArticle} component={EditArticlePage} />
+            <Route exact path={ROUTS.editArticle} component={EditArticlePage} />
+            <Route exact path={ROUTS.fullTextArticle} component={ViewArticlePage} />
           </Switch>
         </HashRouter>
       </div>

@@ -1,0 +1,15 @@
+@import "./base/basics";
+@import "./base/colors";
+
+
+@import "../components/ArticleNote/ArticleNote.scss";
+@import "../components/EditArticlePage/ArticlePage.scss";
+@import "../components/EditArticlePage/Tag.scss";
+@import "../components/HeaderApp/HeaderApp.scss";
+@import "../components/HeaderApp/HeaderPrivate/HeaderPrivate.scss";
+@import "../components/HomePage/HomePage.scss";
+@import "../components/Like/Like.scss";
+@import "../components/LoginPage/LoginPage.scss";
+@import "../components/RegisterPage/RegistrationPage.scss";
+@import "../components/Spinner/Spinner.scss";
+@import "../components/ViewArticlePage/ViewArticlePage.scss";

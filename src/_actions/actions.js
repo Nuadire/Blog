@@ -18,6 +18,10 @@ export const articlesRequest = createAction("ARTICLES_REQUEST");
 export const articlesSuccess = createAction("ARTICLES_SUCCESS");
 export const articlesFailure = createAction("ARTICLES_FAILURE");
 
+export const selectedArticleSuccess = createAction("SELECTED_ARTICLE_SUCCESS");
+export const createArticleSuccess = createAction("CREATE_ARTICLES_SUCCESS");
+export const deleteArticlesSuccess = createAction("DELETE_ARTICLES_SUCCESS");
+
 export const articlesUpdateRequest = createAction("ARTICLE_UPDATE_REQUEST");
 export const articlesUpdateSuccess = createAction("ARTICLE_UPDATE_SUCCESS");
 export const articlesUpdateFailure = createAction("ARTICLE_UPDATE_FAILURE");

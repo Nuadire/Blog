@@ -1,36 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import cn from 'classnames'
+import cn from "classnames";
 import { LIMIT_ARTICLES_PAGE, COUNT_BUTTONS_PAGE } from "../../_constants";
-import { getArticles } from "../../_actions";
+import { getChunkArticles } from "../../_actions";
 import { ArticleNote } from "../ArticleNote/ArticleNote";
 import { Spinner } from "../Spinner/Spinner";
-import "./HomePage.scss";
 
-
-const getCountPage = (articlesCount, limitArticle) => Math.ceil(articlesCount / limitArticle);
+const getCountPage = (articlesCount, limitArticle) =>
+  Math.ceil(articlesCount / limitArticle);
 const generateArrButtonPage = (startNumber, quantity) => {
   const arr = [];
-  while (quantity) {
-    arr.push(startNumber);
-    startNumber++;
-    quantity--;
+  for (
+    let quantityCount = quantity, number = startNumber;
+    quantityCount > 0;
+    // eslint-disable-next-line no-plusplus
+    quantityCount--, number++
+  ) {
+    arr.push(number);
   }
   return arr;
-}
+};
 const getArrDisplayedPage = (currentPage, countPage, countButtonPage) => {
   if (countPage < countButtonPage) return generateArrButtonPage(0, countPage);
-  const borderEnd = countPage - countButtonPage;  
+  const borderEnd = countPage - countButtonPage;
   if (currentPage > borderEnd) {
     return generateArrButtonPage(borderEnd, countButtonPage);
   }
   const borderStart = Math.floor(countButtonPage / 2);
   if (currentPage > borderStart) {
-    return generateArrButtonPage(currentPage -  borderStart, countButtonPage);
+    return generateArrButtonPage(currentPage - borderStart, countButtonPage);
   }
   return generateArrButtonPage(0, countButtonPage);
-}
+};
 
 class HomePage extends React.PureComponent {
   componentDidMount() {
@@ -42,19 +44,24 @@ class HomePage extends React.PureComponent {
     const { currentPage, getArticlePage } = this.props;
     if (currentPage === numberPage) return;
     getArticlePage(numberPage);
-  }
+  };
 
   handlePrevPage = () => {
     const { currentPage, getArticlePage } = this.props;
     if (currentPage === 0) return;
     getArticlePage(currentPage - 1);
-  }
+  };
 
   handleNextPage = () => {
-    const { currentPage, getArticlePage, articlesCount, limitArticle } = this.props;
+    const {
+      currentPage,
+      getArticlePage,
+      articlesCount,
+      limitArticle,
+    } = this.props;
     if (currentPage === getCountPage(articlesCount, limitArticle)) return;
     getArticlePage(currentPage + 1);
-  }
+  };
 
   render() {
     const {
@@ -63,7 +70,7 @@ class HomePage extends React.PureComponent {
       currentPage,
       articlesCount,
       limitArticle,
-      countButtonPage
+      countButtonPage,
     } = this.props;
 
     if (loadingArticles) {
@@ -76,17 +83,19 @@ class HomePage extends React.PureComponent {
     const countPage = getCountPage(articlesCount, limitArticle);
     const canGoNext = currentPage + 1 === countPage;
     const canGoPrev = currentPage === 0;
-    const arrDisplayedPage = getArrDisplayedPage(currentPage, countPage, countButtonPage);
+    const arrDisplayedPage = getArrDisplayedPage(
+      currentPage,
+      countPage,
+      countButtonPage
+    );
     return (
       <>
         {articles &&
           articles.map((article) => {
             return (
-              <ArticleNote
-                key={article.slug}
-                {...article}
-                changeLike={this.changeLike}
-              />
+              <div className="article-note" key={article.slug}>
+                <ArticleNote {...article} />
+              </div>
             );
           })}
         <div className="navigation">
@@ -97,22 +106,22 @@ class HomePage extends React.PureComponent {
             className="navigation__left"
             aria-label="left arrow"
           />
-          {
-            arrDisplayedPage.map(pageNumber => {
-              const btnClass = cn({
-                "navigation__number": true,
-                "navigation__number--active": currentPage === pageNumber
-              });
-              return (
-                <button key={pageNumber} onClick={this.handleNumberPage(pageNumber)}
-                  type="button"
-                  className={btnClass}
-                >
-                  {pageNumber + 1}
-                </button>
-              );
-            })
-          }
+          {arrDisplayedPage.map((pageNumber) => {
+            const btnClass = cn({
+              navigation__number: true,
+              "navigation__number--active": currentPage === pageNumber,
+            });
+            return (
+              <button
+                key={pageNumber}
+                onClick={this.handleNumberPage(pageNumber)}
+                type="button"
+                className={btnClass}
+              >
+                {pageNumber + 1}
+              </button>
+            );
+          })}
           <button
             disabled={canGoNext}
             onClick={this.handleNextPage}
@@ -134,26 +143,30 @@ HomePage.propTypes = {
   articlesCount: PropTypes.number,
   limitArticle: PropTypes.number.isRequired,
   countButtonPage: PropTypes.number.isRequired,
+  userToken: PropTypes.string,  
 };
 
 HomePage.defaultProps = {
   articles: [],
   articlesCount: 0,
+  userToken: ""
 };
 
 function mapState(state) {
   const {
     articlesReducer: { articles, currentPage, articlesCount, loadingArticles },
-    authentication: { loggedIn },
   } = state;
   return {
-    articles, currentPage, articlesCount, loadingArticles, loggedIn,
+    articles,
+    currentPage,
+    articlesCount,
+    loadingArticles,
     limitArticle: LIMIT_ARTICLES_PAGE,
-    countButtonPage: COUNT_BUTTONS_PAGE
+    countButtonPage: COUNT_BUTTONS_PAGE,
   };
 }
 
-const actionCreators = { getArticlePage: getArticles };
+const actionCreators = { getArticlePage: getChunkArticles };
 
 const connectedHomePage = connect(mapState, actionCreators)(HomePage);
 export { connectedHomePage as HomePage };

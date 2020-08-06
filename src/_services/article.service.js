@@ -1,9 +1,14 @@
 import { handleResponse } from "./common.service";
 import { requestUrl } from "../_constants";
 
-const getHeader = (token) => {
+let token = null;
+const setToken = (newToken) => {
+  token = newToken;
+};
+
+const getHeader = (type = "application/json") => {
   const header = {
-    "Content-Type": "application/json",
+    "Content-Type": type,
   };
   if (token) {
     header.authorization = `Token ${token}`;
@@ -11,8 +16,8 @@ const getHeader = (token) => {
   return header;
 };
 
-export const article = {
-  getArticles: (count, skip) => {
+const article = {
+  getChunkArticles: (count, skip) => {
     const requestOptions = {
       method: "GET",
       headers: getHeader(),
@@ -22,47 +27,57 @@ export const article = {
       requestOptions
     ).then(handleResponse);
   },
-  createArticle: () => {
+  getArticle: (slug) => {
+    const requestOptions = {
+      method: "GET",
+      headers: getHeader(),
+    };
+    return fetch(`${requestUrl.articles}/${slug}`, requestOptions).then(
+      handleResponse
+    );
+  },
+  createArticle: (values) => {
     const requestOptions = {
       method: "POST",
       headers: getHeader(),
+      body: JSON.stringify({ article: values }),
     };
     return fetch(requestUrl.articles, requestOptions).then(handleResponse);
   },
-  updateArticle: (slug, obj) => {
+  updateArticle: (slug, values) => {
     const requestOptions = {
       method: "PUT",
       headers: getHeader(),
+      body: JSON.stringify({ article: values }),
     };
-    return fetch(
-      `${requestUrl.articles}/articles/${slug}`,
-      requestOptions
-    ).then(handleResponse);
+    return fetch(`${requestUrl.articles}/${slug}`, requestOptions).then(
+      handleResponse
+    );
   },
   deleteArticle: (slug) => {
     const requestOptions = {
-      method: "DELTE",
-      headers: getHeader(),
+      method: "DELETE",
+      headers: getHeader("text/plain"),
+      mode: "cors",
     };
-    return fetch(
-      `${requestUrl.articles}/articles/${slug}`,
-      requestOptions
-    ).then(handleResponse);
+    return fetch(`${requestUrl.articles}/${slug}`, requestOptions).then(
+      handleResponse
+    );
   },
-  favoriteArticle: (slug, token) => {
+  favoriteArticle: (slug) => {
     const requestOptions = {
       method: "POST",
-      headers: getHeader(token),
+      headers: getHeader(),
     };
     return fetch(
       `${requestUrl.articles}/${slug}/favorite`,
       requestOptions
     ).then(handleResponse);
   },
-  unfavoriteArticle: (slug, token) => {
+  unfavoriteArticle: (slug) => {
     const requestOptions = {
       method: "DELETE",
-      headers: getHeader(token),
+      headers: getHeader(),
     };
     return fetch(
       `${requestUrl.articles}/${slug}/favorite`,
@@ -70,3 +85,5 @@ export const article = {
     ).then(handleResponse);
   },
 };
+
+export { article, setToken };

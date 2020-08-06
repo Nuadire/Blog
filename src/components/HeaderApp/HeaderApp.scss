@@ -29,15 +29,14 @@
 
     &--border {
       padding: 0 10px;
-      color: rgba(0, 0, 0, 0.75);
-      border: 1px solid rgba(0, 0, 0, 0.75);
+      color: $color-border-primary;
+      border: 1px solid $color-text-primary;
       border-radius: 5px;
     }
     
     &--color{
-      color: #52c41a;
-      border: 1px solid #52c41a;
-      
+      color: $color-text-secondary;
+      border: 1px solid $color-border-secondary;
     }
     &--large{
       padding: 10px 20px;      
