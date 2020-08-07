@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import ReactMarkdown from "react-markdown";
 import { ArticleNote } from "../ArticleNote/ArticleNote";
 import { getArticle } from "../../_actions";
 import { Spinner } from "../Spinner/Spinner";
@@ -38,7 +39,9 @@ class ViewArticlePage extends React.PureComponent {
       <div className="view-article">
         <ArticleNote isMyArticle={isMyArticle} {...selectedArticle} />
         {selectedArticle.body && (
-          <div className="view-article__body">{selectedArticle.body}</div>
+          <ReactMarkdown className="view-article__body">
+            {selectedArticle.body}
+          </ReactMarkdown>
         )}
       </div>
     );
@@ -59,8 +62,8 @@ ViewArticlePage.propTypes = {
 };
 
 ViewArticlePage.defaultProps = {
-  selectedArticle: null
-}
+  selectedArticle: null,
+};
 
 function mapState(state) {
   const {

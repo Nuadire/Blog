@@ -92,8 +92,17 @@ class RegisterPage extends React.PureComponent {
           >
             <Input.Password />
           </Form.Item>
-
-          <Form.Item name="agree" valuePropName="checked">
+            <hr className="registration-page__hr" />
+          <Form.Item
+            name="agree"
+            valuePropName="checked"
+            rules={[
+              {
+                required: true,
+                message: "Should accept",
+              },
+            ]}
+          >
             <Checkbox>
               I agree to the processing of my personal information
             </Checkbox>

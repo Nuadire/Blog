@@ -37,6 +37,11 @@
     &--color{
       color: $color-text-secondary;
       border: 1px solid $color-border-secondary;
+
+      &:hover {
+        background-color: #f0fff0;
+        color: $color-text-secondary;
+      }
     }
     &--large{
       padding: 10px 20px;      

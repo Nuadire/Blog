@@ -17,7 +17,7 @@ const Public = () => (
     <Link to={ROUTS.login} className="header-app__btn">
       Sign In
     </Link>
-    <Link to={ROUTS.signUp} className="header-app__btn--border header-app__btn--color header-app__btn--large">
+    <Link to={ROUTS.signUp} className="header-app__btn header-app__btn--border header-app__btn--color header-app__btn--large">
       Sign up
     </Link>
   </div>

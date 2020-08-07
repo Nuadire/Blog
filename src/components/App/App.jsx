@@ -17,7 +17,7 @@ class App extends React.PureComponent {
     const { alert } = this.props;
     return (
       <div className="app">
-        {alert.message && <Alert type={alert.type} message={alert.message} />}
+        {alert.message && <Alert type={alert.type} message={alert.message} closable />}
         <HashRouter>
           <HeaderApp />
           <Switch>
